@@ -2,25 +2,31 @@
 #include <stdio.h>
 
 void bluetooth_receive_data(char* command) {
-    int dir = 0, mode= 0, speed = 0;
+    int dir = 0, mode= 0, delta = 0;
 
     // 首先根据第一个字符判断命令类型
     switch (command[0]) {
         case 'X':  // 处理 X 轴移动
-            sscanf(command, "X%dS%d", &dir, &speed);  // 提取方向和速度
-            move_target('X', dir, speed);
+            sscanf(command, "X%dS%d", &dir, &delta);  // 提取方向和速度
+            if ((dir==0 || dir ==1) && delta >= 0 && delta <=100)
+            {
+                move_target('X', dir, delta);
+            }
             break;
 
         case 'Y':  // 处理 Y 轴移动
-            sscanf(command, "Y%dS%d", &dir, &speed);  // 提取方向和速度
-            move_target('Y', dir, speed);
+            sscanf(command, "Y%dS%d", &dir, &delta);  // 提取方向和速度
+            if ((dir==0 || dir ==1) && delta >= 0 && delta <=100)
+            {
+                move_target('Y', dir, delta);
+            }
             break;
 
         case 'Z':  // 处理 Z 轴移动
-            sscanf(command, "Z%dS%d", &dir, &speed);  // 提取方向和速度
-            if ((dir==0 || dir ==1) && speed >= 0 && speed <=100)
+            sscanf(command, "Z%dS%d", &dir, &delta);  // 提取方向和速度
+            if ((dir==0 || dir ==1) && delta >= 0 && delta <=100)
             {
-                move_target('Z', dir, speed);
+                move_target('Z', dir, delta);
             }
             break;
 

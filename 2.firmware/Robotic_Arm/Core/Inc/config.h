@@ -1,11 +1,6 @@
 #ifndef ROBOTIC_ARM_CONFIG_H
 #define ROBOTIC_ARM_CONFIG_H
 
-double angle_1;
-double angle_2;
-double angle_3;
-double angle_4;
-
 double now_angle_1 = 0;
 double now_angle_2 = 0;
 double now_angle_3 = 0;

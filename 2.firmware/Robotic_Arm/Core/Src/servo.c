@@ -9,11 +9,6 @@ extern double pulse_2;
 extern double pulse_3;
 extern double pulse_4;
 
-extern double angle_1;
-extern double angle_2;
-extern double angle_3;
-extern double angle_4;
-
 extern double now_angle_1;
 extern double now_angle_2;
 extern double now_angle_3;
@@ -340,18 +335,42 @@ void servo_reset(void)
     now_angle_1 = 0;
 }
 
-void move_target(char axis, int direction, int speed)
+void move_target(char axis, int direction, int delta)
 {
     // 假设我们的机械臂有6个舵机，并且有一组逆运动学函数来计算舵机位置
     double target_x = 0, target_y = 0, target_z = 0;
-
+    if (direction)
+    {
+        direction = 1;
+    }
+    else
+    {
+        direction = -1;
+    }
     // 根据方向更新目标末端位置
-    if (axis == 'X') {
-        target_x += direction; // 可以根据需要调整增量
+    if (axis == 'X')
+    {
+        target_x += direction * (direction * 0.1); // 例如基于当前速度调整目标位置
+        servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
+        pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
+        HAL_Delay(20); // 控制更新频率
+    }
+    if (axis == 'Y')
+    {
+        target_x += direction * (current_speed * 0.1); // 例如基于当前速度调整目标位置
+        servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
+        pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
+        HAL_Delay(20); // 控制更新频率
     }
 
-    // 使用逆运动学计算舵机角度
-    servo_angle_calculate(target_x, target_y, target_z);
+    if (axis == 'Z')
+    {
+        target_x += direction * (current_speed * 0.1); // 例如基于当前速度调整目标位置
+        servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
+        pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
+        HAL_Delay(20); // 控制更新频率
+    }
+
 
     // 加速与减速运动控制，同之前的逻辑
     double current_speed = 0.0;
@@ -366,8 +385,7 @@ void move_target(char axis, int direction, int speed)
             current_speed = max_speed;
         }
         // 更新舵机到新目标位置
-        pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
-        HAL_Delay(20); // 控制更新频率
+
     }
 
     // 匀速阶段
