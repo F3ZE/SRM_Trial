@@ -63,7 +63,7 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//Todo : Not that Safe; Better to use DMA; Use main loop to handle data
 {
     if (huart->Instance == USART1)
     {
@@ -92,7 +92,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-    HAL_UART_Receive_DMA(&huart1,(void *)&USART1_RXbuff,1);
+    HAL_UART_Receive_IT(&huart1,(void *)&USART1_RXbuff,1);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -246,7 +246,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

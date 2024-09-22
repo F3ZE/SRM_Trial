@@ -288,7 +288,7 @@ void servo_control(double temp_target_angle_1,double temp_target_angle_2,double 
 
 void servo_reset_begin(void)
 {
-    pwm_out(0,0,0,0,0,90);
+    pwm_out(0,0,0,0);
     HAL_Delay(1000);
     now_angle_1 = 0;
     now_angle_2 = 0;
@@ -350,34 +350,32 @@ void move_target(char axis, int direction, int delta)
     // 根据方向更新目标末端位置
     if (axis == 'X')
     {
-        target_x += direction * (direction * 0.1); // 例如基于当前速度调整目标位置
+        target_x += direction * (delta);
         servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
         pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
         HAL_Delay(20); // 控制更新频率
     }
     if (axis == 'Y')
     {
-        target_x += direction * (current_speed * 0.1); // 例如基于当前速度调整目标位置
+        target_y += direction * (delta);
         servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
         pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
         HAL_Delay(20); // 控制更新频率
     }
-
     if (axis == 'Z')
     {
-        target_x += direction * (current_speed * 0.1); // 例如基于当前速度调整目标位置
+        target_z += direction * (delta);
         servo_angle_calculate(target_x, target_y, target_z); // 更新目标角度
         pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
         HAL_Delay(20); // 控制更新频率
     }
 
-
-    // 加速与减速运动控制，同之前的逻辑
+//todo: 不是很平滑，可以有加减速控制
+/*    // 加速与减速运动控制，同之前的逻辑
     double current_speed = 0.0;
     double max_speed = (double)speed;
     double acceleration = 0.1; // 加速度因子
     double deceleration = 0.1;  // 减速度因子
-
     // 加速阶段
     while (current_speed < max_speed) {
         current_speed += acceleration;
@@ -387,11 +385,6 @@ void move_target(char axis, int direction, int delta)
         // 更新舵机到新目标位置
 
     }
-
-    // 匀速阶段
-    pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
-    HAL_Delay(200); // 控制匀速时间
-
     // 减速阶段
     while (current_speed > 0) {
         current_speed -= deceleration;
@@ -401,7 +394,7 @@ void move_target(char axis, int direction, int delta)
         // 可以选择保持在最后的目标位置
         pwm_out(target_angle_1, target_angle_2, target_angle_3, target_angle_4);
         HAL_Delay(20); // 控制更新频率
-    }
+    }*/
 }
 
 void preset_target(int mode)
