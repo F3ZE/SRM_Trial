@@ -47,3 +47,4 @@ trial\main.o: ../Core/Inc/tim.h
 trial\main.o: ../Core/Inc/usart.h
 trial\main.o: ../Core/Inc/gpio.h
 trial\main.o: ../Users/Inc/ble_remote.h
+trial\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h

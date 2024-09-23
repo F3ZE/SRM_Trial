@@ -43,3 +43,4 @@ trial\seize_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 trial\seize_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 trial\seize_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 trial\seize_task.o: ../Core/Inc/tim.h
+trial\seize_task.o: ../Users/Inc/ble_remote.h
