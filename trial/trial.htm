@@ -3,7 +3,7 @@
 <title>Static Call Graph - [trial\trial.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image trial\trial.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Sep 23 21:16:13 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Sep 24 21:57:46 2024
 <BR><P>
 <H3>Maximum Stack Usage =        776 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1127,10 +1127,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
-<P><STRONG><a name="[58]"></a>StartchassisTask</STRONG> (Thumb, 278 bytes, Stack size 696 bytes, chassis_task.o(i.StartchassisTask))
+<P><STRONG><a name="[58]"></a>StartchassisTask</STRONG> (Thumb, 332 bytes, Stack size 696 bytes, chassis_task.o(i.StartchassisTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 776<LI>Call Chain = StartchassisTask &rArr; Motor_Init &rArr; HAL_TIM_Encoder_Start &rArr; TIM_CCxChannelCmd
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_remote_control_point
+<BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_remote_control_point
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
@@ -1392,6 +1393,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartseizeTask
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartchassisTask
 </UL>
 
 <P><STRONG><a name="[ed]"></a>osKernelStart</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, cmsis_os.o(i.osKernelStart))
