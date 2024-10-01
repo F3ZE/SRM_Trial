@@ -1,6 +1,12 @@
 #ifndef ROBOTIC_ARM_CONFIG_H
 #define ROBOTIC_ARM_CONFIG_H
 
+double R = 14;
+double length_1 = 12;
+double length_2 = 12;
+double length_3 = 12;
+double length_4 = 12;
+
 double now_angle_1 = 0;
 double now_angle_2 = 0;
 double now_angle_3 = 0;

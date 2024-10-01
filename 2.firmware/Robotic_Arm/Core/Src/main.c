@@ -22,7 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bluetooth.h"
-#include "config.h"
+#include "servo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,6 +93,8 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
     HAL_UART_Receive_IT(&huart1,(void *)&USART1_RXbuff,1);
+    pwm_start();
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -101,6 +103,8 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+
+
 
   /* USER CODE END Init */
 
@@ -123,6 +127,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+      pwm_start();
+
+      for(int i=-90;i<=90;i++)
+      {
+          pwm_out(i, i, i, i);
+          HAL_Delay(10);
+      }
+      for(int i=90;i>=-90;i--)
+      {
+          pwm_out(i, i, i, i);
+          HAL_Delay(10);
+      }
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

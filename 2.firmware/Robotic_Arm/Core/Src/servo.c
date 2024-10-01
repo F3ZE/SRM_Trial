@@ -1,4 +1,5 @@
 #include "servo.h"
+#include "config.h"
 #include "main.h"
 #include "math.h"
 #include "stdio.h"
@@ -25,17 +26,12 @@ extern double length_2;
 extern double length_3;
 extern double length_4;
 
-extern double j_all;
 
 extern double l0;
 extern double l1;
 extern double l2;
 
-extern float pi;
-
-extern uint8_t center_x ,center_y ,color_type ;
-
-extern double center_x_cm,center_y_cm;
+extern double pi;
 
 double a1;
 double a2;
@@ -57,12 +53,12 @@ void pwm_start(void)
     HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);//PWM_4
 }
 
-void translate_angle_to_pulse(double angle_1,double angle_2,double angle_3,double angle_4)
+void translate_angle_to_pulse(double angle_1, double angle_2, double angle_3, double angle_4)
 {
-    pulse_1 = (((angle_1 + 70) / 90 ) + 0.5)*(20000/20);
-    pulse_2 = (((angle_2 +90) / 90 ) + 0.5)*(20000/20);
-    pulse_3 = (((angle_3) / 90 ) + 0.5)*(20000/20);
-    pulse_4 = ((((-angle_4 + 90) / 270 * 180) / 90) + 0.5)*(20000/20);
+    pulse_1 = (10 * (angle_1 + 90) / 180 + 2.5) / 100 * 20000;
+    pulse_2 = (10 * (angle_2 + 90) / 180 + 2.5) / 100 * 20000;
+    pulse_3 = (10 * (angle_3 + 90) / 180 + 2.5) / 100 * 20000;
+    pulse_4 = (10 * (angle_4 + 90) / 180 + 2.5) / 100 * 20000;
 }
 
 void pwm_out(double angle_1, double angle_2, double angle_3, double angle_4)
@@ -106,11 +102,11 @@ void servo_angle_calculate(float target_x, float target_y, float target_z)
     n = 0;
     m = 0;
 
-    bottom_r = 14;
-    len_1 = 12;
-    len_2 = 12;
-    len_3 = 12;
-    len_4 = 12;
+    bottom_r = R;
+    len_1 = length_1;
+    len_2 = length_2;
+    len_3 = length_3;
+    len_4 = length_4;
 
     if (target_x == 0)
         j1 = 90;
@@ -120,7 +116,7 @@ void servo_angle_calculate(float target_x, float target_y, float target_z)
 
     for (i = 0; i <= 180; i ++)
     {
-        j_sum = 3.1415927 * i / 180;
+        j_sum = pi * i / 180;
 
         len = sqrt((target_y + bottom_r) * (target_y + bottom_r) + target_x * target_x);
         high = target_z;
@@ -150,7 +146,7 @@ void servo_angle_calculate(float target_x, float target_y, float target_z)
 
     for (i = 0; i <= 180; i ++)
     {
-        j_sum = 3.1415927 * i / 180;
+        j_sum = pi * i / 180;
 
         len = sqrt((target_y + bottom_r) * (target_y + bottom_r) + target_x * target_x);
         high = target_z;
@@ -187,22 +183,19 @@ void servo_angle_calculate(float target_x, float target_y, float target_z)
     printf("center_x: %f\r\n center_y: %f\r\n taret_angle_1: %f\r\n taret_angle_2: %f\r\n taret_angle_3: %f\r\n taret_angle_4: %f\r\n",target_x,target_y,j1,j2,j3,j4);
 }
 
-void servo_control(double temp_target_angle_1,double temp_target_angle_2,double temp_target_angle_3,double temp_target_angle_4,double temp_target_angle_5,double temp_target_angle_6)
+/*void servo_control(double temp_target_angle_1,double temp_target_angle_2,double temp_target_angle_3,double temp_target_angle_4,double temp_target_angle_5,double temp_target_angle_6)
 {
 
-//	 abs_angle_error_1 = fabs(temp_target_angle_1 - now_angle_1);   //������ֵ
-    abs_angle_error_2 = fabs(temp_target_angle_2 - now_angle_2);   //������ֵ
-    abs_angle_error_3 = fabs(temp_target_angle_3 - now_angle_3);   //������ֵ
-    abs_angle_error_4 = fabs(temp_target_angle_4 - now_angle_4);   //������ֵ
-    abs_angle_error_5 = fabs(temp_target_angle_5 - now_angle_5);   //������ֵ
-    abs_angle_error_6 = fabs(temp_target_angle_6 - now_angle_6);   //������ֵ
+//	 abs_angle_error_1 = fabs(temp_target_angle_1 - now_angle_1);
+    abs_angle_error_2 = fabs(temp_target_angle_2 - now_angle_2);
+    abs_angle_error_3 = fabs(temp_target_angle_3 - now_angle_3);
+    abs_angle_error_4 = fabs(temp_target_angle_4 - now_angle_4);
 
 //   a1 = abs_angle_error_1;
     a2 = abs_angle_error_2;
     a3 = abs_angle_error_3;
     a4 = abs_angle_error_4;
-    a5 = abs_angle_error_5;
-    a6 = abs_angle_error_6;
+
 
     if(temp_target_angle_2 != NULL)
     {
@@ -247,44 +240,15 @@ void servo_control(double temp_target_angle_1,double temp_target_angle_2,double 
         pwm_out(temp_target_angle_1,temp_target_angle_2,temp_target_angle_3,temp_target_angle_4,now_angle_5,now_angle_6);
     }
 
-    if(temp_target_angle_6 != NULL)
-    {
-        for(;abs_angle_error_6 >= 3;abs_angle_error_6 --)
-        {
-
-            double pwm_angle_6 = (temp_target_angle_6 > now_angle_6 ? temp_target_angle_6 - abs_angle_error_6 : temp_target_angle_6 + abs_angle_error_6);
-            pwm_out(temp_target_angle_1,temp_target_angle_2,temp_target_angle_3,temp_target_angle_4,now_angle_5,pwm_angle_6);
-            HAL_Delay(20);
-            now_angle_6 = pwm_angle_6;
-        }
-        now_angle_6 = temp_target_angle_6;
-        pwm_out(temp_target_angle_1,temp_target_angle_2,temp_target_angle_3,temp_target_angle_4,now_angle_5,temp_target_angle_6);
-    }
-
-    if(temp_target_angle_5 != NULL)
-    {
-        for(;abs_angle_error_5 >= 3;abs_angle_error_5 --)
-        {
-
-            double pwm_angle_5 = (temp_target_angle_5 > now_angle_5 ? temp_target_angle_5 - abs_angle_error_5 : temp_target_angle_5 + abs_angle_error_5);
-            pwm_out(temp_target_angle_1,temp_target_angle_2,temp_target_angle_3,temp_target_angle_4,pwm_angle_5,temp_target_angle_6);
-            HAL_Delay(20);
-            now_angle_5 = pwm_angle_5;
-        }
-        now_angle_5 = temp_target_angle_5;
-        pwm_out(temp_target_angle_1,temp_target_angle_2,temp_target_angle_3,temp_target_angle_4,temp_target_angle_5,temp_target_angle_6);
-    }
-
     HAL_Delay(1000);
 
     abs_angle_error_1  = a1 ;
     abs_angle_error_2  = a2 ;
     abs_angle_error_3  = a3 ;
     abs_angle_error_4  = a4 ;
-    abs_angle_error_5  = a5 ;
-    abs_angle_error_6  = a6 ;
 
-}
+
+}*/
 
 void servo_reset_begin(void)
 {
@@ -297,6 +261,7 @@ void servo_reset_begin(void)
     HAL_Delay(1000);
 }
 
+/*
 void servo_reset(void)
 {
     double i1 = 0,i2 = 0,i3 = 0;
@@ -334,6 +299,7 @@ void servo_reset(void)
     HAL_Delay(1000);
     now_angle_1 = 0;
 }
+*/
 
 void move_target(char axis, int direction, int delta)
 {
