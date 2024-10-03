@@ -991,10 +991,10 @@ Section Cross References
     chassis_task.o(i.Chassis_Set_Control) refers to fdiv.o(x$fpl$fdiv) for __aeabi_fdiv
     chassis_task.o(i.Chassis_Set_Control) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
     chassis_task.o(i.Chassis_Set_Control) refers to dmul.o(x$fpl$dmul) for __aeabi_dmul
-    chassis_task.o(i.Chassis_Set_Control) refers to faddsub_clz.o(x$fpl$fadd) for __aeabi_fadd
+    chassis_task.o(i.Chassis_Set_Control) refers to faddsub_clz.o(x$fpl$fsub) for __aeabi_fsub
     chassis_task.o(i.Chassis_Set_Control) refers to daddsub_clz.o(x$fpl$dsub) for __aeabi_dsub
     chassis_task.o(i.Chassis_Set_Control) refers to d2f.o(x$fpl$d2f) for __aeabi_d2f
-    chassis_task.o(i.Chassis_Set_Control) refers to faddsub_clz.o(x$fpl$fsub) for __aeabi_fsub
+    chassis_task.o(i.Chassis_Set_Control) refers to faddsub_clz.o(x$fpl$fadd) for __aeabi_fadd
     chassis_task.o(i.Chassis_Set_Control) refers to ffix.o(x$fpl$ffix) for __aeabi_f2iz
     chassis_task.o(i.Chassis_Set_Control) refers to chassis_task.o(.bss) for chassis_
     chassis_task.o(i.Motor_Drive_With_PID) refers to fflt_clz.o(x$fpl$fflt) for __aeabi_i2f
