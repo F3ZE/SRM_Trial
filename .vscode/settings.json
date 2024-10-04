@@ -3,6 +3,7 @@
         "compare": "c",
         "limits": "c",
         "new": "c",
-        "cmsis_os.h": "c"
+        "cmsis_os.h": "c",
+        "ble_remote.h": "c"
     }
 }

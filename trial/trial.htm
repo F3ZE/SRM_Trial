@@ -3,7 +3,7 @@
 <title>Static Call Graph - [trial\trial.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image trial\trial.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Oct 04 00:47:49 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Oct 04 18:19:43 2024
 <BR><P>
 <H3>Maximum Stack Usage =        272 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1104,7 +1104,9 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
-<P><STRONG><a name="[58]"></a>StartseizeTask</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, seize_task.o(i.StartseizeTask))
+<P><STRONG><a name="[58]"></a>StartseizeTask</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, seize_task.o(i.StartseizeTask))
+<BR><BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_remote_control_point
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
 <P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, port.o(i.SysTick_Handler))
@@ -1308,6 +1310,7 @@ Global Symbols
 
 <P><STRONG><a name="[72]"></a>get_remote_control_point</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, ble_remote.o(i.get_remote_control_point))
 <BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartseizeTask
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Chassis_Set_Control
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Chassis_Init
 </UL>
