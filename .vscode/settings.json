@@ -4,6 +4,7 @@
         "limits": "c",
         "new": "c",
         "cmsis_os.h": "c",
-        "ble_remote.h": "c"
+        "ble_remote.h": "c",
+        "main.h": "c"
     }
 }

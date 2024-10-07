@@ -157,9 +157,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>69</LineNumber>
+          <LineNumber>143</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227354</Address>
+          <Address>134234046</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,7 +168,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>../Core/Src/main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\trial\../Core/Src/main.c\69</Expression>
+          <Expression>\\trial\../Core/Src/main.c\143</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -251,6 +251,16 @@
           <count>15</count>
           <WinNumber>1</WinNumber>
           <ItemText>data</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>HAL_UART_Receive_DMA</ItemText>
+        </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>huart3.Instance-&gt;CR1</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
