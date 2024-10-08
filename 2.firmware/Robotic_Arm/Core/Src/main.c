@@ -62,7 +62,6 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//Todo : Not that Safe; Better to use DMA; Use main loop to handle data
 {
     if (huart->Instance == USART1)
@@ -79,8 +78,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//Todo : Not that Safe; B
         HAL_UART_Receive_IT(&huart1, (uint8_t*)&USART1_RXbuff[RX_Index], 1);
     }
 }
-
-
 
 /* USER CODE END 0 */
 
@@ -127,9 +124,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-      pwm_start();
 
-      for(int i=-90;i<=90;i++)
+
+/*      for(int i=-90;i<=90;i++)
       {
           pwm_out(i, i, i, i);
           HAL_Delay(10);
@@ -138,8 +135,10 @@ int main(void)
       {
           pwm_out(i, i, i, i);
           HAL_Delay(10);
-      }
-
+      }*/
+      pwm_start();
+      pwm_out(90, 0, -45, 45);
+      HAL_Delay(10);
 
     /* USER CODE END WHILE */
 
