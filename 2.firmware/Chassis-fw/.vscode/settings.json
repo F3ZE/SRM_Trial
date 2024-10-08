@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "compare": "c",
+        "limits": "c",
+        "new": "c",
+        "cmsis_os.h": "c"
+    }
+}
